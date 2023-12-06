@@ -83,7 +83,7 @@ umsetzen.
 
 Bevor es mit den ersten drei Projekten los geht, gibt es innerhalb des
 Arduino-Projektbuchs das Kapitel „Lerne deine Werkzeuge kennen“, in dem bereits
-erste Schaltkreise vorkommen, dich ich in Tinkercad nachgebaut habe.
+erste Schaltkreise vorkommen, die ich in Tinkercad nachgebaut habe.
 
 #### Baue den Schaltkreis
 
@@ -117,6 +117,18 @@ verbunden, um den Schaltkreis mit Strom zu versorgen.
   loop
 ></video>
 
+Der nächste Schaltkreis ist sehr ähnlich zum ersten Schaltkreis und erfordert
+ebenfalls noch keinen Code. Als einziger Unterschied ist bei diesem Schaltkreis
+ein zweiter Schalter in Reihe mit dem ersten Schalter geschaltet, um das
+Prinzip der Reihenschaltung zu veranschaulichen. Das bedeutet in diesem Fall,
+dass beide Schalter gleichzeitig betätigt werden müssen, damit die LED leuchtet.
+
+In Tinkercad ist es nicht möglich zwei Schalter gleichzeitig zu betätigen und
+somit nicht möglich die LED in diesem Schaltkreis zum Leuchten zu bringen. 
+Allerdings führt auch in Tinkercad weder das Betätigen des Einen noch das
+Betätigen des anderen Schalters zum Aufleuchten der LED, wodurch das Prinzip
+der Reihenschaltung trotzdem veranschaulicht wird.
+
 #### Parallelschaltung
 
 <video
@@ -127,6 +139,11 @@ verbunden, um den Schaltkreis mit Strom zu versorgen.
   loop
 ></video>
 
+Der dritte Schaltkreis besteht aus den selben Bauteilen wie der zweite
+Schaltkreis. Diesmal sind aber beide Schalter parallel zueinander geschaltet
+statt in Reihe zueinander. Das bedeutet, dass das Betätigen eines einzelnen
+Schalters ausreicht, um die LED zum Leuchten zu bringen.
+
 ### Raumschiff-Steuerzentrale
 
 <video
@@ -136,6 +153,26 @@ verbunden, um den Schaltkreis mit Strom zu versorgen.
   playsinline
   loop
 ></video>
+
+Das erste Projekt des Buchs besteht aus einem Schaltkreis mit vier Widerständen,
+zwei roten LEDs, einer grünen LED und einem Schalter. Normalerweise leuchtet
+die grüne LED. Während der Schalter betätigt ist, blinken stattdessen
+abwechselnd die beiden roten LEDs.
+
+Um diese Funktionalität abbilden zu können, wird das erste Mal ein Arduino
+verwendet, für den auch Code zur Steuerung der LEDs geschrieben werden muss.
+Damit die LEDs vom Arduino gesteuert werden können und der Arduino auf das
+Betätigen des Schalters reagieren kann, sind diese vier Bauteile diesmal nicht
+direkt miteinander verbunden. Stattdessen sind jeweils an einen GPIO-Pin des
+Arduinos angeschlossen. Im Code kann dann festgelegt werden welche Pins als
+Output (die LEDs) und welche als Input (der Schalter) verwendet werden sollen:
+
+```cpp
+pinMode(3, OUTPUT);
+pinMode(4, OUTPUT);
+pinMode(5, OUTPUT);
+pinMode(2, INPUT);
+```
 
 ### Love-o-Meter
 
