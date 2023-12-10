@@ -1,0 +1,73 @@
+---
+title: 'Das Verbinden des Joysticks mit dem Raspberry Pi'
+description: 'Lorem ipsum dolor sit amet'
+pubDate: 'Nov 26 2023'
+heroImage: '/blog/connecting-the-joystick-to-the-raspberry-pi/hero.jpg'
+---
+
+![](/blog/connecting-the-joystick-to-the-raspberry-pi/raspberry-pi-imager.jpg)
+
+![](/blog/connecting-the-joystick-to-the-raspberry-pi/raspberry-pi-imager-settings.jpg)
+
+![](/blog/connecting-the-joystick-to-the-raspberry-pi/the-joystick-connected-to-the-raspberry-pi.jpg)
+
+![](/blog/connecting-the-joystick-to-the-raspberry-pi/the-joystick-connected-to-the-raspberry-pi-close-up.jpg)
+
+<video
+  width="720"
+  controls
+  src="/blog/connecting-the-joystick-to-the-raspberry-pi/testing-the-connected-joystick.mp4"
+  playsinline
+  loop
+></video>
+
+## Header-Belegung
+
+### Links
+
+| Pin | Funktion        | BCM | Verwendung      |
+| --- | --------------- | --- | --------------- |
+| 1   | 3V3             |     |                 |
+| 3   | GPIO (SDA)      | 2   |                 |
+| 5   | GPIO (SCL)      | 3   |                 |
+| 7   | GPIO (GPCLK0)   | 4   |                 |
+| 9   | GND             |     |                 |
+| 11  | GPIO            | 17  | Joystick oben   |
+| 13  | GPIO            | 27  | Joystick unten  |
+| 15  | GPIO            | 22  | Joystick rechts |
+| 17  | 3V3             |     |                 |
+| 19  | GPIO (MOSI)     | 10  |                 |
+| 21  | GPIO (MISO)     | 9   |                 |
+| 23  | GPIO (SCLK)     | 11  |                 |
+| 25  | GND             |     |                 |
+| 27  | GPIO (ID_SD)    | 0   |                 |
+| 29  | GPIO            | 5   |                 |
+| 31  | GPIO            | 6   |                 |
+| 33  | GPIO (PWM1)     | 13  |                 |
+| 35  | GPIO (PCM_FS)   | 19  |                 |
+| 37  | GPIO            | 26  |                 |
+| 39  | GND             |     |                 |
+
+### Rechts
+| Pin | Funktion        | BCM | Verwendung      |
+| --- | --------------- | --- | --------------- |
+| 2   | 5V              |     |                 |
+| 4   | 5V              |     |                 |
+| 6   | GND             |     |                 |
+| 8   | GPIO (TXD)      | 14  |                 |
+| 10  | GPIO (RXD)      | 15  |                 |
+| 12  | GPIO (PCM_CLK)  | 18  | Joystick links  |
+| 14  | GND             |     | Joystick        |
+| 16  | GPIO            | 23  |                 |
+| 18  | GPIO            | 24  |                 |
+| 20  | GND             |     |                 |
+| 22  | GPIO            | 25  |                 |
+| 24  | GPIO (CE0)      | 8   |                 |
+| 26  | GPIO (CE1)      | 7   |                 |
+| 28  | GPIO (ID_SC)    | 1   |                 |
+| 30  | GND             |     |                 |
+| 32  | GPIO (PWM0)     | 12  |                 |
+| 34  | GND             |     |                 |
+| 36  | GPIO            | 16  |                 |
+| 38  | GPIO (PCM_DIN)  | 20  |                 |
+| 40  | GPIO (PCM_DOUT) | 21  |                 |
