@@ -1,23 +1,39 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import HeaderLink from '../components/HeaderLink.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
 ---
 
 <html lang="de">
 	<head>
 		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
+			.row {
+				padding: 3em 1em;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				flex-direction: row-reverse;
+				column-gap: 1em;
+				align-items: start;
+			}
 			main {
-				width: calc(100% - 2em);
+				padding: 0;
 				max-width: 100%;
 				margin: 0;
+				flex: 1;
 			}
 			.hero-image {
 				width: 100%;
@@ -51,35 +67,87 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			aside {
+				max-width: 100%;
+			}
+			.card {
+				background-color: #e4e1e9;
+				border-radius: 12px;
+				padding: 0.8em;
+			}
+			nav {
+				display: flex;
+				flex-direction: column;
+				row-gap: 0.6em;
+			}
+			nav a {
+				color: black;
+				text-decoration-color: var(--accent);
+			}
+			@media (min-width: 1135px) {
+				aside {
+					width: 340px;
+					max-height: calc(100vh - 2em);
+					overflow-y: auto;
+					position: sticky;
+					top: 1em;
+				}
+				aside .prose {
+					padding: 0;
+					max-width: 100%;
+				}
+			}
 		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Zuletzt aktualisiert am <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
+		<div class="row">
+			<main>
+				<article>
+					<div class="hero-image">
+						{
+							heroImage &&
+							<img width={1020} height={510} src={heroImage} alt="" />
+						}
 					</div>
-					<slot />
+					<div class="prose">
+						<div class="title">
+							<div class="date">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											Zuletzt aktualisiert am
+											<FormattedDate date={updatedDate} />
+										</div>
+									)
+								}
+							</div>
+							<h1>{title}</h1>
+							<hr />
+						</div>
+						<slot />
+					</div>
+				</article>
+			</main>
+			<aside>
+				<div class="prose">
+					<div class="card">
+						<h2>Beiträge</h2>
+						<nav>
+							{
+								posts.map((post) => (
+									<HeaderLink href={`/blog/${post.slug}/`}>
+										{post.data.title}
+									</HeaderLink>
+								))
+							}
+						</nav>
+					</div>
 				</div>
-			</article>
-		</main>
+			</aside>
+		</div>
 		<Footer />
 	</body>
 </html>
