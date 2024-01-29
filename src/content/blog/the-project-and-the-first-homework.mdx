@@ -163,15 +163,17 @@ Um diese Funktionalität abbilden zu können, wird das erste Mal ein Arduino
 verwendet, für den auch Code zur Steuerung der LEDs geschrieben werden muss.
 Damit die LEDs vom Arduino gesteuert werden können und der Arduino auf das
 Betätigen des Schalters reagieren kann, sind diese vier Bauteile diesmal nicht
-direkt miteinander verbunden. Stattdessen sind jeweils an einen GPIO-Pin des
+direkt miteinander verbunden. Stattdessen sind sie jeweils an einen GPIO-Pin des
 Arduinos angeschlossen. Im Code kann dann festgelegt werden welche Pins als
 Output (die LEDs) und welche als Input (der Schalter) verwendet werden sollen:
 
 ```cpp
-pinMode(3, OUTPUT);
-pinMode(4, OUTPUT);
-pinMode(5, OUTPUT);
-pinMode(2, INPUT);
+void setup() {
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(2, INPUT);
+}
 ```
 
 ### Love-o-Meter
