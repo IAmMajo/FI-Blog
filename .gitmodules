@@ -1,0 +1,3 @@
+[submodule "game/Star-Guard"]
+	path = game/Star-Guard
+	url = git@github.com:SetsunaiCodes/Star-Guard.git

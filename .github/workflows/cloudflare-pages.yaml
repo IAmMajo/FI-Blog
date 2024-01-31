@@ -8,10 +8,15 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4.1.1
+      - uses: actions/setup-python@v5.0.0
+        with:
+          cache: 'pip'
       - uses: actions/setup-node@v4.0.0
         with:
           cache: npm
       - run: |
+          pip install -r requirements.txt
+          pygbag --ume_block 0 --icon game/favicon.png --title "Star Guard" --build game/pygbag
           npm ci
           npm run build
       - uses: cloudflare/pages-action@v1.5.0
