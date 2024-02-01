@@ -16,10 +16,11 @@ jobs:
       - uses: actions/setup-node@v4.0.0
         with:
           cache: npm
-      - run: |
-          pip install -r requirements.txt
-          pygbag --ume_block 0 --icon game/favicon.png --title "Star Guard" --can_close 1 --build game/pygbag
-          npm ci
+      - run: >
+          pip install -r requirements.txt &&
+          pygbag --ume_block 0 --icon game/favicon.png --title "Star Guard"
+          --can_close 1 --build game/pygbag &&
+          npm ci &&
           npm run build
       - uses: cloudflare/pages-action@v1.5.0
         with:

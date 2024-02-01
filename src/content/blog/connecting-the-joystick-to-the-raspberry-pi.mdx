@@ -5,13 +5,40 @@ pubDate: 'Nov 26 2023'
 heroImage: '/blog/connecting-the-joystick-to-the-raspberry-pi/hero.jpg'
 ---
 
+Ich habe mit Nico zusammen den Joystick an den Raspberry Pi angeschlossen.
+
+Um den Raspberry Pi verwenden zu können, mussten wir erstmal das
+Rasperry-Pi-Betriebssystem auf einer SD-Karte installieren. Dafür gibt es
+das Programm Raspberry Pi Imager.
+
 ![](/blog/connecting-the-joystick-to-the-raspberry-pi/raspberry-pi-imager.jpg)
 
+Im Raspberry Pi Imager können auch direkt Einstellungen wie beispielsweise die
+WLAN-Einrichtung vorgenommen werden.
+
 ![](/blog/connecting-the-joystick-to-the-raspberry-pi/raspberry-pi-imager-settings.jpg)
+
+Nach Abschluss der Installation haben wir die SD-Karte dann in den Raspeberry Pi
+gesteckt.
+
+Der Joystick musste über fünf Kabel mit dem Raspberry Pi verbunden werden.
+Einmal ein Kabel, das an GND angeschlossen werden musste, und vier Kabel für die
+vier verschiedenen Richtungen, in die der Joystick bewegt werden kann (oben,
+unten, links, rechts). Diese vier Kabel wurden an vier GPIO-Pins des Raspberry
+Pis angeschlossen.
 
 ![](/blog/connecting-the-joystick-to-the-raspberry-pi/the-joystick-connected-to-the-raspberry-pi.jpg)
 
 ![](/blog/connecting-the-joystick-to-the-raspberry-pi/the-joystick-connected-to-the-raspberry-pi-close-up.jpg)
+
+Wir haben folgenden Skript zum Testen des Joysticks verwendet. Dabei mussten wir
+darauf achten, dass immer abgefragt wird, ob auf dem entsprechende Input
+**kein** Strom liegt, da es sich bei unserem Joystick um einen
+Always-High-Joystick handelt. Das bedeutet, dass standardmäßig auf allen vier
+GPIO-Pins Strom liegt und auf einem GPIO-Pin nur kein Strom liegt, wenn der
+Joystick gerade in die entsprechende Richtung gedrückt wird. Zusätzlich musste
+darauf geachtet werden für alle vier Inputs einen Pull-Up-Widerstand zu
+aktivieren.
 
 ```python
 import time
@@ -47,6 +74,9 @@ while True:
 GPIO.cleanup()
 ```
 
+Im Video ist zu sehen wie der Skript funktioniert und die Richtungen des
+angeschlossenen Joysticks korrekt ausgegeben werden.
+
 <video
 	width="720"
 	controls
@@ -56,6 +86,8 @@ GPIO.cleanup()
 ></video>
 
 ## Header-Belegung
+
+Hier ist die Header-Belegung unseres Raspberry Pis nach Anschluss des Joysticks.
 
 ### Links
 
