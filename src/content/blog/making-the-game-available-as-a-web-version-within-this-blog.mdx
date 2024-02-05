@@ -5,13 +5,24 @@ pubDate: 'Feb 4 2024'
 heroImage: '/blog/making-the-game-available-as-a-web-version-within-this-blog/hero.jpg'
 ---
 
+Nico hat mir den Code des Spiels in Form eines
+[GitHub-Repositories](https://github.com/SetsunaiCodes/Star-Guard) zukommen
+lassen. Ich wollte das Spiel anschließend als Web-Version verfügbar machen.
+Dafür habe ich Nicos Repository als Submodul in mein eigenes Repository des
+Blogs eingebunden.
+
 ```shellscript
 git submodule add git@github.com:SetsunaiCodes/Star-Guard.git game/Star-Guard
 ```
 
+Zukünftig kann ich das Spiel einfach aktualisieren, indem ich das Submodul
+aktualisiere.
+
 ```shellscript
 git submodule update --remote
 ```
+
+Dann habe ich noch den Deployment-Prozess angepasst.
 
 ```diff
  steps:
@@ -39,6 +50,8 @@ git submodule update --remote
        directory: dist
        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+Ich habe eine eigene Seite für das Spiel erstellt.
 
 ```astro
 ---
@@ -185,6 +198,8 @@ import Footer from '../components/Footer.astro';
   </body>
 </html>
 ```
+
+Das fertige Ergebnis sieht dann so aus.
 
 ![](/blog/making-the-game-available-as-a-web-version-within-this-blog/game-with-overlay-without-focus.jpg)
 
